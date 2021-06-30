@@ -16,7 +16,10 @@ let scrape = async () => {
   try {
     // Init pushbullet
     const pusher = new PushBullet(PUSHBULLET_TOKEN);
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    ignoreHTTPSErrors: true,
+    dumpio: false,
+    headless: true })
     const page = await browser.newPage()
     await page.setViewport({ width: 1366, height: 768 }) 
     // Enter url in page
